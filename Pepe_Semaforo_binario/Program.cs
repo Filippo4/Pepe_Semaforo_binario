@@ -6,6 +6,7 @@ namespace Pepe_Semaforo_binario
     class Program
     {
         static int n;
+        static SemaphoreSlim s = new SemaphoreSlim(1);
         static void Main(string[] args)
         {
             while (true)
@@ -25,14 +26,18 @@ namespace Pepe_Semaforo_binario
         {
             for (int i = 0; i <= 1000000; i++)
             {
+                s.Wait();
                 n++;
+                s.Release();
             }
         }
         private static void Decrementa()
         {
             for (int i = 0; i <= 1000000; i++)
             {
+                s.Wait();
                 n--;
+                s.Release();
             }
         }
     }
